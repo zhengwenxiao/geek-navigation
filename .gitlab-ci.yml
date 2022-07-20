@@ -13,7 +13,7 @@ clean1:
   only:
     - prod
   script:
-    - cd /home/wwwroot/nav.geekape.net/
+    - cd /home/wwwroot/navigation/
     - rm -rf web server admin
     - pm2 stop all
     - pm2 delete all
@@ -34,7 +34,7 @@ build_admin:
     - yarn build
     - echo "admin打包完成"
     - mv dist admin
-    - mv admin/ /home/wwwroot/nav.geekape.net/
+    - mv admin/ /home/wwwroot/navigation/
     - echo "admin移动目录完成"
   allow_failure: true
 
@@ -44,15 +44,15 @@ build_server:
   only:
     - prod
   script:
-    - mv geekape-nav-server/ /home/wwwroot/nav.geekape.net/
+    - mv geekape-nav-server/ /home/wwwroot/navigation/
     - echo "server移动目录完成"
-    - cd /home/wwwroot/nav.geekape.net/
+    - cd /home/wwwroot/navigation/
     - mv geekape-nav-server server
     - cd server/
     - tyarn install
     - echo "server包安装完成"
-    - rm -rf /home/wwwroot/nav.geekape.net/server/config/mongodb.ts
-    - cp /home/wwwroot/nav.geekape.net/mongodb.ts /home/wwwroot/nav.geekape.net/server/config/
+    - rm -rf /home/wwwroot/navigation/server/config/mongodb.ts
+    - cp /home/wwwroot/navigation/mongodb.ts /home/wwwroot/navigation/server/config/
     - pm2 start npm --name "geekape-nav-server" -- run server
     - echo "pm2 server启动成功"
   allow_failure: true
@@ -63,8 +63,8 @@ build_main:
   only:
     - prod
   script:
-    - mv geekape-nav-main/ /home/wwwroot/nav.geekape.net/
-    - cd /home/wwwroot/nav.geekape.net/
+    - mv geekape-nav-main/ /home/wwwroot/navigation/
+    - cd /home/wwwroot/navigation/
     - mv geekape-nav-main web
     - cd web/
     - tyarn install
